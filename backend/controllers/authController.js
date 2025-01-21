@@ -44,8 +44,10 @@ export const signup = async (req, res) => {
     // Set cookie
     res.cookie('token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
+      secure: process.env.NODE_ENV === 'production', // true in production
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // important for cross-site cookies
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      domain: process.env.NODE_ENV === 'production' ? '.vercel.app' : 'localhost' // adjust domain based on environment
     });
 
     res.status(201).json({

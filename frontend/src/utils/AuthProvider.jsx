@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
+        credentials: 'include',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
