@@ -28,9 +28,10 @@ app.use(
       "https://full-stack-online-food-ordering-system-frontend.vercel.app",
       "https://full-stack-online-food-ordering-system-backend.vercel.app",
     ],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    exposedHeaders: ['Set-Cookie']
 }));
 
 // Connect to MongoDB
