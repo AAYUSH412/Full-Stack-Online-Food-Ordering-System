@@ -22,7 +22,7 @@ dotenv.config();
 
 // Allow CORS from specific origins
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:4000'],
+  origin: ['http://localhost:5173', 'http://localhost:4000','https://full-stack-online-food-ordering-system-frontend.vercel.app','https://full-stack-online-food-ordering-system-backend.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
