@@ -19,6 +19,8 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error('Auth check failed:', error);
       setUser(null);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -26,20 +28,11 @@ export const AuthProvider = ({ children }) => {
     checkAuth();
   }, []);
 
-  const value = {
-    user,
-    setUser,
-    loading,
-    checkAuth
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user, setUser, loading, checkAuth }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-};
+export const useAuth = () => useContext(AuthContext);

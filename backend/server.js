@@ -16,7 +16,7 @@ import orderRoutes from "./routes/orderRoutes.js";
 const app = express();
 app.use(bodyParser.json());
 app.use(fileUpload());
-app.use(cookieParser());
+
 dotenv.config();
 
 // Allow CORS from specific origins
@@ -33,6 +33,7 @@ app.use(
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
     exposedHeaders: ['Set-Cookie']
 }));
+app.use(cookieParser());
 
 // Connect to MongoDB
 connectdb();
