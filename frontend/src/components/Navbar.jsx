@@ -16,6 +16,18 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu when navigating
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   const handleSignOut = async () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signout`, {
@@ -26,6 +38,7 @@ const Navbar = () => {
       if (data.success) {
         setUser(null);
         setDropdownOpen(false);
+        setIsOpen(false);
         navigate('/');
       }
     } catch (error) {
@@ -38,23 +51,23 @@ const Navbar = () => {
       hasScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between h-14 sm:h-16 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center flex-shrink-0">
             <span className={`font-bold transition-all duration-300 ${
-              hasScrolled ? 'text-2xl md:text-3xl' : 'text-3xl md:text-4xl'
+              hasScrolled ? 'text-xl sm:text-2xl md:text-3xl' : 'text-2xl sm:text-3xl md:text-4xl'
             }`}>
               BiteBuddy
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:space-x-8">
+          <div className="hidden md:flex md:items-center md:space-x-6 lg:space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className="text-gray-900 hover:text-blue-600 px-3 py-2 text-lg font-medium"
+                className="text-gray-900 hover:text-blue-600 px-2 lg:px-3 py-2 text-base lg:text-lg font-medium"
               >
                 {item.label}
               </Link>
@@ -62,9 +75,9 @@ const Navbar = () => {
           </div>
 
           {/* Right Side Items */}
-          <div className="flex items-center space-x-4">
-            <Link to="/cart" className="p-2 hover:bg-gray-100 rounded-full">
-              <ShoppingCart className="w-6 h-6 text-gray-600" />
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            <Link to="/cart" className="p-1.5 sm:p-2 hover:bg-gray-100 rounded-full">
+              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
             </Link>
 
             {/* Desktop Auth */}
@@ -80,12 +93,12 @@ const Navbar = () => {
                         {user.name.charAt(0).toUpperCase()}
                       </span>
                     </div>
-                    <span className="text-gray-700">{user.name}</span>
+                    <span className="text-gray-700 text-sm lg:text-base">{user.name}</span>
                     <ChevronDown className="w-4 h-4 text-gray-600" />
                   </button>
 
                   {dropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 border border-gray-100">
                       <Link
                         to="/dashboard"
                         className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -105,16 +118,16 @@ const Navbar = () => {
                   )}
                 </div>
               ) : (
-                <div className="space-x-4">
+                <div className="space-x-3 lg:space-x-4">
                   <Link
                     to="/sign-in"
-                    className="px-4 py-2 text-gray-700 hover:text-gray-900 font-medium"
+                    className="px-3 lg:px-4 py-2 text-sm lg:text-base text-gray-700 hover:text-gray-900 font-medium"
                   >
                     Sign in
                   </Link>
                   <Link
                     to="/sign-up"
-                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium"
+                    className="px-3 lg:px-4 py-2 text-sm lg:text-base bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium"
                   >
                     Sign up
                   </Link>
@@ -125,12 +138,12 @@ const Navbar = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 rounded-md hover:bg-gray-100"
+              className="md:hidden p-1.5 sm:p-2 rounded-md hover:bg-gray-100"
             >
               {isOpen ? (
-                <X className="h-6 w-6 text-gray-600" />
+                <X className="h-5 w-5 sm:h-6 sm:w-6 text-gray-600" />
               ) : (
-                <Menu className="h-6 w-6 text-gray-600" />
+                <Menu className="h-5 w-5 sm:h-6 sm:w-6 text-gray-600" />
               )}
             </button>
           </div>
@@ -138,14 +151,14 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden fixed inset-0 top-16 bg-white">
-            <div className="px-4 pt-8 pb-6 space-y-6">
+          <div className="md:hidden fixed inset-0 top-14 sm:top-16 bg-white z-50 overflow-y-auto">
+            <div className="px-4 pt-6 pb-8 space-y-4">
               {navItems.map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
                   onClick={() => setIsOpen(false)}
-                  className="block text-xl font-medium text-gray-900 hover:text-blue-600 py-2"
+                  className="block text-lg sm:text-xl font-medium text-gray-900 hover:text-blue-600 py-2"
                 >
                   {item.label}
                 </Link>
@@ -156,30 +169,30 @@ const Navbar = () => {
                   <Link
                     to="/dashboard"
                     onClick={() => setIsOpen(false)}
-                    className="block text-xl font-medium text-gray-900 hover:text-blue-600 py-2"
+                    className="block text-lg sm:text-xl font-medium text-gray-900 hover:text-blue-600 py-2"
                   >
                     Dashboard
                   </Link>
                   <button
                     onClick={handleSignOut}
-                    className="block w-full text-left text-xl font-medium text-gray-900 hover:text-blue-600 py-2"
+                    className="block w-full text-left text-lg sm:text-xl font-medium text-gray-900 hover:text-blue-600 py-2"
                   >
                     Sign out
                   </button>
                 </>
               ) : (
-                <div className="mt-8 space-y-4">
+                <div className="mt-6 space-y-3">
                   <Link
                     to="/sign-in"
                     onClick={() => setIsOpen(false)}
-                    className="block w-full text-center px-4 py-3 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                    className="block w-full text-center px-4 py-3 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 text-base sm:text-lg"
                   >
                     Sign in
                   </Link>
                   <Link
                     to="/sign-up"
                     onClick={() => setIsOpen(false)}
-                    className="block w-full text-center px-4 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                    className="block w-full text-center px-4 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-base sm:text-lg"
                   >
                     Sign up
                   </Link>

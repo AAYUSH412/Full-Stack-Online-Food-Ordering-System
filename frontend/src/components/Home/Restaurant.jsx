@@ -31,13 +31,13 @@ const Restaurant = () => {
   };
 
   return (
-    <section className="py-12 md:py-16 bg-white">
+    <section className="py-8 sm:py-10 md:py-16 bg-white">
       <div className="max-w-screen mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-5xl xs:text-3xl font-bold text-gray-900 text-center mb-8 md:mb-12"
+          className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 text-center mb-6 sm:mb-8 md:mb-12"
         >
           Featured Restaurants
         </motion.h2>
@@ -46,7 +46,7 @@ const Restaurant = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
         >
           {featuredRestaurants.map((restaurant) => (
             <motion.div
@@ -55,24 +55,24 @@ const Restaurant = () => {
               whileHover={{ scale: 1.03 }}
               className="bg-white rounded-lg shadow-lg overflow-hidden group border border-gray-100"
             >
-              <div className="relative aspect-w-16 aspect-h-9">
+              <div className="relative w-full pt-[60%]">
                 <img 
                   src={restaurant.image} 
                   alt={restaurant.name} 
-                  className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-110" 
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" 
                 />
                 <motion.div 
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.2 }}
-                  className="absolute top-4 right-4 bg-white rounded-full px-2 py-1 flex items-center shadow-md"
+                  className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-white rounded-full px-2 py-1 flex items-center shadow-md"
                 >
-                  <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                  <span className="ml-1 text-sm font-semibold">{restaurant.rating}</span>
+                  <Star className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current" />
+                  <span className="ml-1 text-xs sm:text-sm font-semibold">{restaurant.rating}</span>
                 </motion.div>
               </div>
-              <div className="p-4">
-                <h3 className="font-semibold text-lg mb-2">{restaurant.name}</h3>
+              <div className="p-3 sm:p-4">
+                <h3 className="font-semibold text-base sm:text-lg mb-2">{restaurant.name}</h3>
               </div>
             </motion.div>
           ))}
@@ -82,14 +82,14 @@ const Restaurant = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="mt-8 md:mt-12 text-center"
+          className="mt-6 sm:mt-8 md:mt-12 text-center"
         >
           <Link 
-            to='/restaurants'
-            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200 cursor-pointer"
+            to="/restaurants"
+            className="inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 bg-blue-600 text-white text-sm sm:text-base font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
           >
             View All
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
           </Link>
         </motion.div>
       </div>
