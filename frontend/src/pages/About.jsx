@@ -105,12 +105,7 @@ const AboutUs = () => {
         </motion.section>
 
         {/* Call to Action */}
-        <motion.div className="text-center" variants={fadeIn}>
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">Ready to Join BiteBuddy?</h2>
-          <button className="bg-purple-600 text-white px-8 py-3 rounded-full hover:bg-purple-700 transition-colors">
-            Get Started Today
-          </button>
-        </motion.div>
+        
       </motion.div>
     </div>
   );

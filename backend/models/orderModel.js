@@ -25,6 +25,10 @@ const orderSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  razorpayOrderId: { // Add this field
+    type: String,
+    required: true
+  },
   status: {
     type: String,
     enum: ['Order Received', 'Preparing', 'Out for Delivery', 'Delivered', 'Cancelled'],

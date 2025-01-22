@@ -10,9 +10,8 @@ const Footer = () => {
             <div>
               <h3 className="text-lg font-semibold mb-4">About</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">About Us</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">Careers</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">Blog</a></li>
+                <li><a href="/aboutus" className="text-gray-400 hover:text-white transition-colors duration-300">About Us</a></li>
+                <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors duration-300">Contact us</a></li>
               </ul>
             </div>
             <div>
@@ -63,7 +62,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 BiteBuddy. All rights reserved.</p>
+            <p>&copy; 2025 BiteBuddy. All rights reserved.</p>
           </div>
         </div>
       </footer>

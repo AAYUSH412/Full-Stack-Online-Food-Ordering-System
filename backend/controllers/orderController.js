@@ -3,7 +3,7 @@ import Cart from '../models/cartdata.js';
 
 export const createOrder = async (req, res) => {
   try {
-    const { paymentId } = req.body;
+    const { paymentId, razorpayOrderId } = req.body;
     
     // Get cart items
     const cart = await Cart.findOne();
@@ -14,12 +14,13 @@ export const createOrder = async (req, res) => {
       });
     }
 
-    // Create order
+    // Create order with both IDs
     const order = await Order.create({
       user: req.user.id,
       items: cart.items,
       totalAmount: cart.totalAmount,
       paymentId,
+      razorpayOrderId, // Add this field
       restaurantId: cart.items[0].restaurantId
     });
 
@@ -28,7 +29,11 @@ export const createOrder = async (req, res) => {
 
     res.status(201).json({
       success: true,
-      data: order
+      data: {
+        _id: order._id,
+        razorpayOrderId: order.razorpayOrderId,
+        ...order._doc
+      }
     });
   } catch (error) {
     console.error('Create order error:', error);
@@ -59,8 +64,11 @@ export const getUserOrders = async (req, res) => {
 
 export const getOrderById = async (req, res) => {
   try {
-    const order = await Order.findOne({
-      _id: req.params.orderId,
+    let order = await Order.findOne({
+      $or: [
+        { _id: req.params.orderId },
+        { razorpayOrderId: req.params.orderId }
+      ],
       user: req.user.id
     });
 
@@ -87,9 +95,12 @@ export const getOrderById = async (req, res) => {
 export const updateOrderStatus = async (req, res) => {
   try {
     const { status } = req.body;
-    const order = await Order.findOne({
-      _id: req.params.orderId,
-      user: req.user.id
+    
+    let order = await Order.findOne({
+      $or: [
+        { _id: req.params.orderId },
+        { razorpayOrderId: req.params.orderId }
+      ]
     });
 
     if (!order) {

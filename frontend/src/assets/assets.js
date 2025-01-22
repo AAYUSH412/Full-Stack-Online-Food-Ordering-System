@@ -28,12 +28,12 @@ export const testimonials = [
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80",
   },
   {
-    name: "Jessica Williams",
+    name: "Mark Johnson",
     comment:
       "I love the healthy options available on BiteBuddy. It has made my life so much easier.",
     rating: 4,
     image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80",
+      "https://ik.imagekit.io/xh3awoalr/food-delivery/Screenshot%202025-01-22%20at%2012.44.14%E2%80%AFPM.png?updatedAt=1737530153884",
   },
 ];
 

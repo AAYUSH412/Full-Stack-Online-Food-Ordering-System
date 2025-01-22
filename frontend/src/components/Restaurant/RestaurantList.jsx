@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Star, IndianRupee, Clock } from 'lucide-react';
+import { motion } from 'framer-motion';
+import LoadingSpinner from '../LoadingSpinner';
 
 const RestaurantListing = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -31,9 +33,13 @@ const RestaurantListing = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 pt-20 flex justify-center items-center">
-        <div className="text-xl">Loading restaurants...</div>
-      </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="min-h-screen pt-20 flex justify-center items-center"
+      >
+        <LoadingSpinner text="Loading restaurants..." />
+      </motion.div>
     );
   }
 

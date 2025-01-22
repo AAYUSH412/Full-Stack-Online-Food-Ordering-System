@@ -5,7 +5,7 @@ const menuItemSchema = new mongoose.Schema({
   description: { type: String, required: true },
   price: { type: Number, required: true },
   image: { type: [String], required: true },
-  isVeg: { type: Boolean, required: true }
+  isVeg: { type: Boolean, required: true, }
 });
 
 const restaurantdetailsSchema = new mongoose.Schema({

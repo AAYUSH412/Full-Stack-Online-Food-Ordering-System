@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Star, Clock, IndianRupee, Plus} from 'lucide-react';
+import { motion } from 'framer-motion';
+import LoadingSpinner from '../LoadingSpinner';
+import { ToastContainer, toast } from 'react-toastify';
 
 const RestaurantDetail = () => {
   const { id } = useParams();
@@ -10,6 +13,7 @@ const RestaurantDetail = () => {
   const [error, setError] = useState(null);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [cartMessage, setCartMessage] = useState('');
+  
 
   useEffect(() => {
     const fetchRestaurantAndMenu = async () => {
@@ -61,7 +65,7 @@ const RestaurantDetail = () => {
       
       const data = await response.json();
       if (data.success) {
-        setCartMessage('Item added to cart');
+        setCartMessage('Item added to cart,Go to Cart');
         setTimeout(() => setCartMessage(''), 3000);
       }
     } catch (error) {
@@ -74,9 +78,13 @@ const RestaurantDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 pt-20 flex justify-center items-center">
-        <div className="text-xl">Loading restaurant details...</div>
-      </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="min-h-screen pt-20 flex justify-center items-center"
+      >
+        <LoadingSpinner text="Loading restaurant details..." />
+      </motion.div>
     );
   }
 

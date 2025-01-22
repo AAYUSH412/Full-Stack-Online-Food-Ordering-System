@@ -20,18 +20,18 @@ app.use(fileUpload());
 dotenv.config();
 
 // Allow CORS from specific origins
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:4000",
-      "https://full-stack-online-food-ordering-system-frontend.vercel.app",
-      "https://full-stack-online-food-ordering-system-backend.vercel.app",
-    ],
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-    exposedHeaders: ['Set-Cookie']
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:4000",
+    "http://localhost:5174", 
+    "https://full-stack-online-food-ordering-system-frontend.vercel.app",
+    "https://full-stack-online-food-ordering-system-backend.vercel.app",
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'], 
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+  exposedHeaders: ['Set-Cookie']
 }));
 app.use(cookieParser());
 
