@@ -15,8 +15,12 @@ const ManageOrder = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders/user`, {
-        credentials: 'include'
+      // Change from /api/orders/user to /api/orders/all
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders/all`, {
+        credentials: 'include',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}` // Add token if you're using JWT
+        }
       });
       const data = await response.json();
       
