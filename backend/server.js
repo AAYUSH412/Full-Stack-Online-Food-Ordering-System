@@ -24,7 +24,8 @@ app.use(cors({
   origin: [
     "http://localhost:5173",
     "http://localhost:4000",
-    "http://localhost:5174", 
+    "http://localhost:5174",
+    "https://bite-buddy-food.vercel.app",
     "https://full-stack-online-food-ordering-system-frontend.vercel.app",
     "https://full-stack-online-food-ordering-system-backend.vercel.app",
   ],
