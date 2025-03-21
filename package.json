@@ -1,0 +1,31 @@
+{
+    "name": "bitebuddy",
+    "version": "1.0.0",
+    "description": "BiteBuddy - Your Ultimate Food Ordering Buddy",
+    "private": true,
+    "workspaces": [
+      "frontend",
+      "backend",
+      "admin"
+    ],
+    "scripts": {
+      "dev:frontend": "cd frontend && npm run dev",
+      "dev:backend": "cd backend && npm run dev",
+      "dev:admin": "cd admin && npm run dev",
+      "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\" \"npm run dev:admin\"",
+      "build:frontend": "cd frontend && npm run build",
+      "build:admin": "cd admin && npm run build",
+      "build": "npm run build:frontend && npm run build:admin",
+      "start": "cd backend && npm start"
+    },
+    "keywords": [
+      "food-delivery",
+      "mern",
+      "restaurant"
+    ],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+      "concurrently": "^8.2.0"
+    }
+  }
