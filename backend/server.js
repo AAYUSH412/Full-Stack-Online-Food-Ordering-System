@@ -27,6 +27,7 @@ app.use(cors({
     "http://localhost:5174", 
     "https://full-stack-online-food-ordering-system-frontend.vercel.app",
     "https://full-stack-online-food-ordering-system-backend.vercel.app",
+    "https://bite-buddy-food.vercel.app"
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'], 
